@@ -1,0 +1,9 @@
+<div class="m-3">
+<h1>Micropost Details</h1>
+
+<p><strong>User ID: </strong><%=@micropost.user_id %></p>
+<p><strong>Content: </strong><%=@micropost.content %></p>
+
+<%= link_to 'Back', microposts_path, {:class => 'btn btn-dark'}%>
+<%= link_to 'Edit', edit_micropost_path(@micropost), {:class => 'btn btn-dark'} %>
+</div>

@@ -1,0 +1,32 @@
+<div class="m-3">
+<p><%= notice %></p>
+
+<div class="m-3"><h1>Users</h1>
+<%= link_to 'New User',new_user_path,{:class => 'btn btn-dark m-3' } %>
+<%= link_to 'See Microposts', microposts_path,{:class => 'btn btn-dark'} %>
+
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col" colspan="3">Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do|user| %>
+            <tr>
+            <td><%=user.id%></td>
+            <td><%=user.name%></td>
+            <td><%=user.email%></td>
+            <td><%= link_to 'View', user, {:class => 'btn btn-light'}%></td></button>
+            <td><%= link_to 'Edit', edit_user_path(user), {:class => 'btn btn-light'} %></td>
+            <td><%= link_to "Delete", user, :class => 'btn btn-light', data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+</div>
+</div>
