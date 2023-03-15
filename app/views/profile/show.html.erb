@@ -1,12 +1,5 @@
-<h1>Hi <%=Current.user.name%>,</h1>
-<% if @user.name != Current.user.name %>
-<h3>WELCOME TO <%=@user.name%>'s PROFILE,</h3>
-<% else %>
-<h3>WELCOME TO YOUR PROFILE!</h1>
-<% end %>
+<h1>WELCOME TO <%=user.name%>'s PROFILE,</h1>
 
-
-<%= link_to 'Add Toy',new_micropost_path, {:class => 'btn btn-outline-primary m-3'}%>
 <div class="row row-cols-1 row-cols-md-3 g-4">
 <% @microposts.each do|micropost| %>
   <div class="col">
@@ -19,8 +12,6 @@
         <p class="card-text">
         <%=micropost.content %>
         </p>
-        <h7 class="card-title">Posted by: <%=micropost.user.name%></h7></br>
-
         <h7 class="card-title">Post Date: <%=micropost.created_at%></h7>
       </div>
       <li style = "list-style-type: none; padding-left: 20px">

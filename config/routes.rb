@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root "users#index"
   resources :users
   resources :microposts
-
+ 
   get "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
 
@@ -20,9 +20,7 @@ Rails.application.routes.draw do
   get "password/reset/edit", to: "password_resets#edit"
   patch "password/reset/edit", to: "password_resets#update"
   
-  get "profile", to: "profile#index"
-  
-  
+  get "profile/:id", to: "profile#index", as:"profile"
   
   root to: "main#index"
 end

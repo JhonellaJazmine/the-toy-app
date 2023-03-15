@@ -51,7 +51,7 @@ end
 private
 
     def micropost_params
-        params.require(:micropost).permit(:content, :image, :user_id)
+        params.require(:micropost).permit(:title, :content, :image, :user_id)
     end
 
     def set_micropost

@@ -1,43 +1,44 @@
-<div class="m-3">
-<p><%= notice %></p>
-<div class="m-3"><h1>Microposts</h1>
-<%= link_to 'New Micropost',new_micropost_path, {:class => 'btn btn-dark m-3'}%>
-<%= link_to 'Back to Users',users_path, {:class => 'btn btn-dark'} %>
+</br>
+</br>
 
+<h1>TOYS</h1>
+</br>
+<!-----<%= link_to 'New Micropost',new_micropost_path, {:class => 'btn btn-dark m-3'}%>---->
+ <!-----<%= link_to 'Back to Users',users_path, {:class => 'btn btn-dark'} %>-->
 
+<div class="row row-cols-1 row-cols-md-3 g-4">
 <% @microposts.each do|micropost| %>
-    <div class = "container">
-    <div class = "row">
-    <div class = "col-4">
-    <div class="card">
-  <div class="card-header">
-        User ID
-        <%=micropost.user_id %></br>
-    </div>
-    <div class="card-body">
-    <h5 class="card-title">Title</h5>
-
-    Image
-    </br>
+  <div class="col">
+    <div class="card h-100">
     <% if micropost.image.attached?%>
-    <%=image_tag(micropost.image, style:"height: 100px;") %></br><% end %>
-    </br>
-            Content
-            <p class="card-text"><%=micropost.content %></p></br>
-        
-          
-            Actions
-            </br>
-            <%= link_to 'View', micropost, {:class => 'btn btn-light'} %>
+    <%=image_tag(micropost.image)%>
+    <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%=micropost.title%></h5>
+        <p class="card-text">
+        <%=micropost.content %>
+        </p>
+        <h7 class="card-title"><%=micropost.created_at.strftime("%B %d %Y, %l:%M%P")%></h7>
+      </div>
+      <li style = "list-style-type: none; padding-left: 20px">
+            Posted by:<%= link_to micropost.user.name, profile_path(micropost.user.id), {:class => 'btn btn-light'} %></br>
+            <% if micropost.user == Current.user %>
             <%= link_to 'Edit', edit_micropost_path(micropost), {:class => 'btn btn-light'} %>
             <%= link_to "Delete", micropost, :class => 'btn btn-light', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-            </br>
+                     
+            <% end %>
+            </li>
         </br>
-        </div>
-    </div>
     </div>
 
-    </div>
-    </div>
 
-    <% end %>
+ 
+
+
+    
+  </div>
+  <% end %>
+  
+</div>
+</br>
+</br>

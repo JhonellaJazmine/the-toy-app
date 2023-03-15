@@ -1,6 +1,6 @@
 <%= form_with(model: micropost, data: { turbo: false }) do |form| %>
     <% if @micropost.errors.any? %>
-       <h2><%= pluralize(@micropost.errors.size, 'error') %> prevented this micropost from being saved:</h2>
+       <h2><%= pluralize(@micropost.errors.size, 'error') %> prevented this toy from being posted:</h2>
        <ul>
        <% @micropost.errors.full_messages.each do |msg| %>
            <li><%= msg %></li>
@@ -8,18 +8,25 @@
        </ul>
 <% end %>
 
-<div>
-    <%= form.label :content %><br>
-    <%= form.text_field :content %>
+<div class="mb-3">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, class: "form-control", placeholder: "Toy Name" %>
 </div>
 
-<div>
-    <%= form.file_field :image %>
+<div class="mb-3">
+    <%= form.label :content %><br>
+    <%= form.text_area :content, class: "form-control", placeholder: "Description about the toy..." %>
+</div>
+
+<div class="mb-3">
+    <%= form.file_field :image%>
 </div>
 
 <%= form.hidden_field :user_id, value: Current.user.id %>
 
-<div>
-<%= form.submit ({:class => 'btn btn-dark'})%>
+<div class="mb-3">
+<%= form.submit ({:class => 'btn btn-primary'})%>
 </div>
 <% end %>
+
+

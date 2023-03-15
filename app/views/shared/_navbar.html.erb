@@ -1,34 +1,49 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Toy App</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container px-5">
+    
+	<% if Current.user %>
+		<%= link_to "Toy App", microposts_path, class: "navbar-brand" %>
+	<% else %>
+		<%= link_to "Toy App", root_path, class: "navbar-brand" %>
+	<% end %>
 
-    <div class="collapse navbar-collapse" id="navbarNav"> 
-    <ul class="navbar-nav">
-        <li class="nav-item">
-          <li><%= link_to "Dashboard", microposts_path, class: "nav-link" %></li>
-        </li>
-      </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
 
-<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-  <% if Current.user %>
-  <li class ="nav-item">
-    <%= link_to "Profile",  profile_path, class: "nav-link"%>
-  </li>
-  <li class ="nav-item">
-    <%= button_to "Logout", logout_path, method: :delete, class: "nav-link" %>
-  </li>
-  <% else %>
-  <li class ="nav-item">
-    <%= link_to "Sign Up", sign_up_path, class: "nav-link"%>
-  </li>
-  <li class ="nav-item">
-    <%= link_to "Login", sign_in_path, class: "nav-link"%>
-  </li>
-  <% end %>
+				<% if Current.user %>
 
+				<li class ="nav-item">
+				<%= link_to "Add Toy.", new_micropost_path, class: "nav-link"%>
+				</li>
+				<li class ="nav-item">
+				<%= link_to "Dashboard.", microposts_path, class: "nav-link" %>
+				</li>
+				<li class ="nav-item">
+				  <%= link_to "Profile.",  profile_path(Current.user), class: "nav-link"%>
+				</li>
+				<li class ="nav-item">
+				  <%= button_to "Logout.", logout_path, method: :delete, class: "nav-link btn btn-outline-info rounded-pill" %>
+				</li>
+				<% else %>
+				<li class ="nav-item">
+				  <%= link_to "Sign Up.", sign_up_path, class: "nav-link"%>
+				</li>
+				<li class ="nav-item">
+				  <%= link_to "Login.", sign_in_path, class: "nav-link"%>
+				</li>
+				<% end %>
+			  
+
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
+
+
+
+
+
+
+
