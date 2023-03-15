@@ -6,7 +6,7 @@ class Micropost < ApplicationRecord
     has_one_attached :image
 
     validates :image, attached:true, content_type: { in:
-    %w(images/jpeg image/png image/jpg), message: 'must be in JPG, JPEG, or PNG format'}
+    %w(.jpeg .png .jpg), message: 'must be in JPG, JPEG, or PNG format'}
 end
 
 
