@@ -1,4 +1,4 @@
-<% provide(:title, "Profile") %>
+<% provide(:title, @user.name) %>
 
 <h1>Hi <%=Current.user.name%>,</h1>
 <% if @user.name != Current.user.name %>
@@ -14,7 +14,7 @@
   <div class="col">
     <div class="card h-100">
     <% if micropost.image.attached?%>
-    <%=image_tag(micropost.image)%>
+    <%=image_tag(micropost.image, :class => "h-100")%>
     <% end %>
       <div class="card-body">
         <h5 class="card-title"><%=micropost.title%></h5>
@@ -22,13 +22,18 @@
         <%=micropost.content %>
         </p>
         <h7 class="card-title">Posted by: <%=micropost.user.name%></h7></br>
-
-        <h7 class="card-title">Post Date: <%=micropost.created_at%></h7>
+        <% if (Time.zone.now - micropost.created_at) > 3.day %>
+        <h7 class="card-title"><%=micropost.created_at.strftime("%B %d %Y")%></h7>
+      <% else %>
+        <h7 class="card-title"><%=time_ago_in_words(micropost.created_at)%> ago</h7>
+      <% end %>
       </div>
+      <% if micropost.user == Current.user %>
       <li style = "list-style-type: none; padding-left: 20px">
             <%= link_to 'Edit', edit_micropost_path(micropost), {:class => 'btn btn-light'} %>
             <%= link_to "Delete", micropost, :class => 'btn btn-light', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
         </li>
+        <% end %>
         </br>
     </div>
     

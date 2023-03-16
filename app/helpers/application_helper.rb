@@ -4,7 +4,7 @@ module ApplicationHelper
         if user.avatar.attached?
             url_for(user.avatar)
         else
-            ActionController::Base.helpers.asset_path('avatar.jpg')
+            ActionController::Base.helpers.asset_path('avatar.png')
         end
     end
 end
