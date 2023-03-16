@@ -21,6 +21,7 @@
             <td><%=user.id%></td>
             <td><%=user.name%></td>
             <td><%=user.email%></td>
+            <td><%=image_tag avatar_url(user)%></td>
             <td><%= link_to 'View', user, {:class => 'btn btn-light'}%></td></button>
             <td><%= link_to 'Edit', edit_user_path(user), {:class => 'btn btn-light'} %></td>
             <td><%= link_to "Delete", user, :class => 'btn btn-light', data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%></td>

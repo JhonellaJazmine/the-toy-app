@@ -1,6 +1,7 @@
 class MicropostsController < ApplicationController
     before_action :set_micropost, only: %i[show edit update destroy]
     before_action :require_user_logged_in!
+    
     def index
         @microposts = Micropost.all.order(:created_at)
         

@@ -1,8 +1,10 @@
+<% provide(:title, "Profile") %>
+
 <h1>Hi <%=Current.user.name%>,</h1>
 <% if @user.name != Current.user.name %>
-<h3>WELCOME TO <%=@user.name%>'s PROFILE,</h3>
+<h3><%=image_tag avatar_url(@user), class: "rounded-circle", size:'60x60'%> WELCOME TO <%=@user.name%>'s PROFILE,</h3>
 <% else %>
-<h3>WELCOME TO YOUR PROFILE!</h1>
+<h3><%=image_tag avatar_url(Current.user), class: "rounded-circle", size:'60x60'%>WELCOME TO YOUR PROFILE!</h1>
 <% end %>
 
 
