@@ -1,11 +1,13 @@
 <% provide(:title, @micropost.title) %>
+</br>
+
 <%= link_to 'Back', microposts_path, {:class => 'btn btn-outline-primary'}%>
 <% if @micropost.user == Current.user %>
 <%= link_to 'Edit', edit_micropost_path(@micropost), {:class => 'btn btn-outline-primary'} %>
 <% end %>
 </br>
 </br>
-</br>
+
 <div class="container text-center">
   <div class="row">
     <h1>TOY DETAILS</h1>

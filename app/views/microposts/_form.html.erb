@@ -1,38 +1,114 @@
-<%= form_with(model: micropost, data: { turbo: false }) do |form| %>
-    <% if @micropost.errors.any? %>
-       <h2><%= pluralize(@micropost.errors.size, 'error') %> prevented this toy from being posted:</h2>
-       <ul>
-       <% @micropost.errors.full_messages.each do |msg| %>
-           <li><%= msg %></li>
-       <% end %>
-       </ul>
-<% end %>
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-11">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
 
-<div class="mb-3">
-    <%= form.label :title %><br>
-    <%= form.text_field :title, class: "form-control", placeholder: "Toy Name" %>
-</div>
+            <!--FOR NEW VIEW--->
+                  <% if controller_name == 'microposts' && action_name == 'new' %>
+                  <%= image_tag("new.png", class: "img-fluid", style: "border-radius: 1rem 0 0 1rem;") %>
+                  <% end %>
 
-<div class="mb-3">
-    <%= form.label :content %><br>
-    <%= form.text_area :content, class: "form-control", placeholder: "Description about the toy..." %>
-</div>
+            <!--FOR EDIT VIEW--->
+                  <% if controller_name == 'microposts' && action_name == 'edit' %>
+                  <%= image_tag("edit.png", class: "img-fluid", style: "border-radius: 1rem 0 0 1rem;") %>
+                  <% end %>      
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5">
 
-<div class="mb-3">
-    <%= form.label :image %>
-    <%= form.file_field :image%>
-</div>
+    
 
-<div class="mb-3">
-    <%= form.label :additional_images %>
-    <%= form.file_field :additional_images, multiple: true %>
-</div>
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <!--FOR NEW VIEW--->
+                  <% if controller_name == 'microposts' && action_name == 'new' %>
+                    <span class="h1 fw-bold mb-0">Add Toy</span>
+                  <% end %>
 
-<%= form.hidden_field :user_id, value: Current.user.id %>
+                  <!--FOR EDIT VIEW--->
+                  <% if controller_name == 'microposts' && action_name == 'edit' %>
+                    <span class="h1 fw-bold mb-0">Edit Toy</span>
+                  <% end %>
 
-<div class="mb-3">
-<%= form.submit ({:class => 'btn btn-primary'})%>
-</div>
-<% end %>
+                  </div>
+
+                  <%= form_with(model: micropost, data: { turbo: false }) do |form| %>
+                    <% if @micropost.errors.any? %>
+                        <h2><%= pluralize(@micropost.errors.size, 'error') %> prevented this toy from being posted:</h2>
+                        <ul>
+                        <% @micropost.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                    <% end %>
+
+                  <div class="form-outline mb-4">
+                    <%= form.label :title %><br>
+                    <%= form.text_field :title, class: "form-control", placeholder: "Toy Name" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= form.label :content %><br>
+                    <%= form.text_area :content, class: "form-control", placeholder: "Description about the toy..." %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= form.label :image %>
+                    <%= form.file_field :image, id: "post_image"%>
+                    <%= image_tag "", id: "preview-image", class: "hidden", size:'150x150' %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= form.label :additional_images %>
+                    <%= form.file_field :additional_images, multiple: true,  onchange: "previewImages()" %>
+                  </div>
+
+                  <div id="image-preview" class="mb-4"></div>
 
 
+                  <%= form.hidden_field :user_id, value: Current.user.id %>
+                  
+                  <div class="mb-3">
+                  <%= form.submit ({:class => 'btn btn-primary'})%>
+                  </div>
+                  <% end %>
+
+                  
+        
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </br>
+      </br>
+    </div>
+    
+  </div>
+
+
+</section>
+
+
+<script>
+function previewImages() {
+    var previewContainer = $('#image-preview');
+    previewContainer.empty();
+    var files = $('#micropost_additional_images')[0].files;
+    if (files.length > 0) {
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          var previewUrl = event.target.result;
+          var previewImage = $('<img>').addClass('preview-image').attr('src', previewUrl);
+          previewContainer.append(previewImage);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+</script>
