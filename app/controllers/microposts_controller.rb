@@ -52,7 +52,7 @@ end
 private
 
     def micropost_params
-        params.require(:micropost).permit(:title, :content, :image, :user_id)
+        params.require(:micropost).permit(:title, :content, :image, :user_id, additional_images: [])
     end
 
     def set_micropost

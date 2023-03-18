@@ -19,7 +19,13 @@
 </div>
 
 <div class="mb-3">
+    <%= form.label :image %>
     <%= form.file_field :image%>
+</div>
+
+<div class="mb-3">
+    <%= form.label :additional_images %>
+    <%= form.file_field :additional_images, multiple: true %>
 </div>
 
 <%= form.hidden_field :user_id, value: Current.user.id %>

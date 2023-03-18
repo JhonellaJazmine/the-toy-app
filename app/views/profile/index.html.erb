@@ -4,7 +4,7 @@
 <% if @user.name != Current.user.name %>
 <h3><%=image_tag avatar_url(@user), class: "rounded-circle", size:'60x60'%> WELCOME TO <%=@user.name%>'s PROFILE,</h3>
 <% else %>
-<h3><%=image_tag avatar_url(Current.user), class: "rounded-circle", size:'60x60'%>WELCOME TO YOUR PROFILE!</h1>
+<h3><%=image_tag avatar_url(Current.user), class: "rounded-circle", size:'60x60'%>WELCOME TO YOUR PROFILE!</h3>
 <% end %>
 
 
@@ -30,6 +30,7 @@
       </div>
       <% if micropost.user == Current.user %>
       <li style = "list-style-type: none; padding-left: 20px">
+            <%= link_to 'View', micropost, {:class => 'btn btn-light'} %>
             <%= link_to 'Edit', edit_micropost_path(micropost), {:class => 'btn btn-light'} %>
             <%= link_to "Delete", micropost, :class => 'btn btn-light', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
         </li>
@@ -43,3 +44,4 @@
 </div>
 </br>
 </br>
+

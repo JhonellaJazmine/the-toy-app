@@ -14,12 +14,12 @@
   <div class="col">
     <div class="card h-100">
     <% if micropost.image.attached?%>
-    <%=image_tag(micropost.image, :class => "h-100")%>
+    <%= image_tag (micropost.additional_image_as_thumbnail(micropost.image)) %>
     <% end %>
    
       <div class="card-body">
-        <h5 class="card-title"><%=micropost.title%></h5>
-        <p class="card-text">
+      <p><strong>TOY: </strong><%=micropost.title%></p>
+        <p class="card-text"><strong>ABOUT:</strong>
         <%=micropost.content %>
         </p>
         <% if (Time.zone.now - micropost.created_at) > 3.day %>
@@ -30,8 +30,10 @@
       </div>
       <li style = "list-style-type: none; padding-left: 20px">
             Posted by:</br>
+            
             <%=image_tag avatar_url(micropost.user), class: "rounded-circle", size:'48x48'%>
             <%= link_to micropost.user.name, profile_path(micropost.user.id), {:class => 'btn btn-light'} %></br>
+            <%= link_to 'View', micropost, {:class => 'btn btn-light'} %>
             <% if micropost.user == Current.user %>
             <%= link_to 'Edit', edit_micropost_path(micropost), {:class => 'btn btn-light'} %>
             <%= link_to "Delete", micropost, :class => 'btn btn-light', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
