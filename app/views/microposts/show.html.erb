@@ -31,7 +31,7 @@
       <div class="carousel-inner">
         <%@micropost.additional_images.each_with_index do |pic,i|%>
         <div class="carousel-item <%= "active " if i==0 %>">
-          <%= image_tag (@micropost.additional_image_as_thumbnail(pic)) %>
+          <%= image_tag (pic), style:"height:200px;" %>
         </div>
         <%end%>
       </div>

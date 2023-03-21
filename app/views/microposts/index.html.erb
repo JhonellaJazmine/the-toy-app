@@ -14,7 +14,7 @@
   <div class="col">
     <div class="card h-100">
     <% if micropost.image.attached?%>
-    <%= image_tag (micropost.additional_image_as_thumbnail(micropost.image)) %>
+    <%= image_tag (micropost.image), style:"height:410px;"%>
     <% end %>
    
       <div class="card-body">
