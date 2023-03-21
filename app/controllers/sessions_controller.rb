@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         
         else
             flash[:alert] = "Invalid email or password"
-            render :new
+            render :new, status: 422
         end
     end
 

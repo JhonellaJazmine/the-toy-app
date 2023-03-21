@@ -15,11 +15,15 @@
                   <% if controller_name == 'microposts' && action_name == 'edit' %>
                   <%= image_tag("edit.png", class: "img-fluid", style: "border-radius: 1rem 0 0 1rem;") %>
                   <% end %>      
+
+            <!--FOR VIEW WITH ERRORS--->
+                  <% if @micropost.errors.any? %>
+                    <%= image_tag("error.png", class: "img-fluid", style: "border-radius: 1rem 0 0 1rem;") %>
+                  <% end %> 
+
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5">
-
-    
 
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <!--FOR NEW VIEW--->
@@ -32,16 +36,20 @@
                     <span class="h1 fw-bold mb-0">Edit Toy</span>
                   <% end %>
 
+                  <!--FOR EDIT VIEW--->
+                  <% if @micropost.errors.any? %>
+                    <span class="h1 fw-bold mb-0">Try Again</span>
+                  <% end %>
+
                   </div>
 
-                  <%= form_with(model: micropost, data: { turbo: false }) do |form| %>
+                  <%= form_with(model: micropost, data: { turbo: true }) do |form| %>
                     <% if @micropost.errors.any? %>
-                        <h2><%= pluralize(@micropost.errors.size, 'error') %> prevented this toy from being posted:</h2>
-                        <ul>
+                    <div class="alert alert-danger">
                         <% @micropost.errors.full_messages.each do |msg| %>
-                            <li><%= msg %></li>
+                            <div><%= msg %></div>
                         <% end %>
-                        </ul>
+                        </div>
                     <% end %>
 
                   <div class="form-outline mb-4">
@@ -75,8 +83,6 @@
                   </div>
                   <% end %>
 
-                  
-        
 
               </div>
             </div>
@@ -92,23 +98,4 @@
 
 </section>
 
-
-<script>
-function previewImages() {
-    var previewContainer = $('#image-preview');
-    previewContainer.empty();
-    var files = $('#micropost_additional_images')[0].files;
-    if (files.length > 0) {
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        var reader = new FileReader();
-        reader.onload = function(event) {
-          var previewUrl = event.target.result;
-          var previewImage = $('<img>').addClass('preview-image').attr('src', previewUrl);
-          previewContainer.append(previewImage);
-        }
-        reader.readAsDataURL(file);
-      }
-    }
-  }
-</script>
+<%= javascript_include_tag ("preview.js")%>

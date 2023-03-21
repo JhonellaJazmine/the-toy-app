@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
         session[:user_id] = @user.id #to check if logged in
         redirect_to microposts_path, notice: "Successfully created account"
        else
-            render :new
+            render :new, status: 422
        end
     end
 

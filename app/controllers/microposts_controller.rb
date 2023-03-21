@@ -19,7 +19,7 @@ class MicropostsController < ApplicationController
         if @micropost.save 
             redirect_to microposts_path, notice: 'Micropost has been created successfully.'
         else
-            render :new
+            render :new, status: 422
         end
     end
 
@@ -36,7 +36,7 @@ def update
     if @micropost.update(micropost_params)
         redirect_to microposts_path, notice: 'Micropost has been updated successfully.'
     else
-        render :edit
+        render :edit, status: 422
     end
 end
 

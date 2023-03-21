@@ -1,6 +1,6 @@
 class Micropost < ApplicationRecord
     belongs_to :user
-    validates :title, :content, :image, length: { maximum: 140 }, 
+    validates :title, :content, :image, :additional_images, length: { maximum: 140 }, 
                         presence: true
 
     has_one_attached :image
@@ -8,6 +8,9 @@ class Micropost < ApplicationRecord
     validates :image, attached:true, content_type: { in:
     %w(.jpeg .png .jpg), message: 'must be in JPG, JPEG, or PNG format'}
 
+
+    validates :additional_images, attached:true, content_type: { in:
+    %w(.jpeg .png .jpg), message: 'must be in JPG, JPEG, or PNG format'}
 
     def image_as_thumbnail
         image.variant(resize: "350x350!").processed
