@@ -18,7 +18,8 @@ class Micropost < ApplicationRecord
 
 
     def additional_image_as_thumbnail(pic)
-        pic.variant(resize: "200x200!").processed
+        # pic.variant(resize: "200x200!").processed
+        pic.variant(resize: "#{200.to_f}x#{200.to_f}!").processed
     end
 
 end
